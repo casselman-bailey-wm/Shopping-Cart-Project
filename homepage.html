@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <script>
+        function onLoad() {
+            isFirstTime()
+            checkCookie()
+            pullCart()
+
+        }
+
+        function isFirstTime() {
+            var firstTime = getCookie("firstTime");
+            if (firstTime == "NO") {
+                console.log("this is not their first time");
+                var numberOfCookies = Number(getCookie("numberOfCookies"));
+                if (numberOfCookies > 0) {
+                    console.log("there are " + numberOfCookies + " cookies in the cookie jar");
+                    grabAllCookies();
+                }
+                else {
+                    console.log("there are no cookies in the cookie jar");
+                }
+            }
+            else {
+                console.log("this is their first time");
+                document.cookie = "firstTime=NO";
+                document.cookie = "userId=" + (Math.random() * 3 * Math.random() * 6 * Math.random() * 8 );
+
+                document.cookie = "product_1=0";
+                document.cookie = "product_2=0";
+                document.cookie = "product_3=0";
+                document.cookie = "product_4=0";
+                document.cookie = "product_5=0";
+                document.cookie = "product_6=0";
+                document.cookie = "product_7=0";
+                document.cookie = "product_8=0";
+                document.cookie = "product_9=0";
+            }
+        }
+
+        function getCookie(cname) {
+            var cookies = document.cookie;
+            cookies = cookies.split("; ");
+
+            for (var i = 0; i < cookies.length; i++) {
+                cookies2 = cookies[i].split('=');
+                if (cookies2[0] == cname) {
+                    i = cookies.lenght + 1;
+                    result = cookies2[1];
+                    return cookies2[1];
+                }
+            }
+        }
+
+        function grabAllCookies() {
+            var numberOfCookies = getCookie("numberOfCookies");
+            console.log("grabbing  all cookies")
+
+            for (i = 0; i < numberOfCookies; i++) {
+                var productCookie = 'product' + (i + 1);
+                breakCookie(productCookie);
+            }
+        }
+
+        function breakCookie(productValues) {
+            console.log("crumbling cookies")
+
+            var cookies = document.cookie;
+            cookies = cookies.split("; ");
+
+            for (var i = 0; i < cookies.length; i++) {
+                cookies2 = cookies[i].split('=');
+                var productNumber = cookies2[0];
+                if (cookies2[0] == productValues) {
+                    i = cookies.lenght + 1;
+                    productToAdd = cookies2[1];
+                    var values = productToAdd.split(", ");
+                    addProductCookies(values[0], values[1], values[2], values[3], productNumber);
+                }
+            }
+        }
+    </script>
+
+
+    <script>
+        function addProduct(productId) {
+
+            console.log(productId);
+            getCookieVal = getCookie(productId);
+            console.log(getCookieVal);
+            getCookieVal = getCookieVal.split("=");
+            numberOfProducts = Number(getCookieVal) + 1;
+            console.log(numberOfProducts);
+            document.cookie = productId + "=" + numberOfProducts;
+
+
+        }
+
+        function removeProduct(productId) {
+            console.log(productId);
+            getCookieVal = getCookie(productId);
+            console.log(getCookieVal);
+            getCookieVal = getCookieVal.split("=");
+            numberOfProducts = Number(getCookieVal) - 1;
+            console.log(numberOfProducts);
+            document.cookie = productId + "=" + numberOfProducts;
+        }
+
+        function pullCart() {
+            product_1 = getCookie('product_1')
+            product_2 = getCookie('product_2')
+            product_3 = getCookie('product_3')
+            product_4 = getCookie('product_4')
+            product_5 = getCookie('product_5')
+            product_6 = getCookie('product_6')
+            product_7 = getCookie('product_7')
+            product_8 = getCookie('product_8')
+            product_9 = getCookie('product_9')
+
+
+            console.log(product_1)
+            console.log(product_2)
+            console.log(product_3)
+            console.log(product_4)
+            console.log(product_5)
+            console.log(product_6)
+            console.log(product_7)
+            console.log(product_8)
+            console.log(product_9)
+
+
+            if (product_1 == 0 && product_2 == 0 && product_3 == 0 && product_4 == 0 && product_5 == 0 && product_6 == 0 && product_7 == 0 && product_8 == 0 && product_9 == 0) {
+                document.getElementById("noProducts").innerHTML = 'There are no products in your cart.';
+            }
+
+            if (product_1 > 0) {
+                var createTable = document.createElement("TR");
+
+                var node = document.createElement("TD");
+                var textnode = document.createTextNode('');
+
+                node.appendChild(textnode);
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);
+                node.setAttribute("id", "product1");
+                document.getElementById("product1").innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Toco_toucan_(Ramphastos_toco).jpg" alt="Toucan" height="180px"></a> Toucan '
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode(product_1);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode("$" + product_1 * 666.98);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+            }
+
+            if (product_2 > 0) {
+                var createTable = document.createElement("TR");
+
+                var node = document.createElement("TD");
+                var textnode = document.createTextNode('');
+
+                node.appendChild(textnode);
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);
+                node.setAttribute("id", "product2");
+                document.getElementById("product2").innerHTML = '<img src="" alt="" height="180px"></a> '
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode(product_2);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode("$" + product_2 * 666.98);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+            }
+
+            if (product_3 > 0) {
+                var createTable = document.createElement("TR");
+
+                var node = document.createElement("TD");
+                var textnode = document.createTextNode('');
+
+                node.appendChild(textnode);
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);
+                node.setAttribute("id", "product3");
+                document.getElementById("product3").innerHTML = '<img src="" alt="" height="180px"></a>'
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode(product_3);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode("$" + product_3 * 666.98);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+            }
+
+            if (product_4 > 0) {
+                var createTable = document.createElement("TR");
+
+                var node = document.createElement("TD");
+                var textnode = document.createTextNode('');
+
+                node.appendChild(textnode);
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);
+                node.setAttribute("id", "product4");
+                document.getElementById("product4").innerHTML = '<img src="" alt="" height="180px"></a>'
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode(product_4);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode("$" + product_4 * 666.98);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+            }
+
+            if (product_5 > 0) {
+                var createTable = document.createElement("TR");
+
+                var node = document.createElement("TD");
+                var textnode = document.createTextNode('');
+
+                node.appendChild(textnode);
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);
+                node.setAttribute("id", "product5");
+                document.getElementById("product5").innerHTML = '<img src="" alt="" height="180px"></'
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode(product_5);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode("$" + product_1 * 666.98);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+            }
+
+            if (product_6 > 0) {
+                var createTable = document.createElement("TR");
+
+                var node = document.createElement("TD");
+                var textnode = document.createTextNode('');
+
+                node.appendChild(textnode);
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);
+                node.setAttribute("id", "product6");
+                document.getElementById("product6").innerHTML = '<img src="" alt="" height="180px"></a> '
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode(product_6);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode("$" + product_6 * 666.98);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+            }
+
+            if (product_7 > 0) {
+                var createTable = document.createElement("TR");
+
+                var node = document.createElement("TD");
+                var textnode = document.createTextNode('');
+
+                node.appendChild(textnode);
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);
+                node.setAttribute("id", "product7");
+                document.getElementById("product7").innerHTML = '<img src="" alt="" height="180px"></a>'
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode(product_7);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode("$" + product_7 * 666.98);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+            }
+
+            if (product_8 > 0) {
+                var createTable = document.createElement("TR");
+
+                var node = document.createElement("TD");
+                var textnode = document.createTextNode('');
+
+                node.appendChild(textnode);
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);
+                node.setAttribute("id", "product8");
+                document.getElementById("product8").innerHTML = '<img src="" alt="" height="180px"></a> '
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode(product_8);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode("$" + product_8 * 666.98);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+            }
+
+            if (product_9 > 0) {
+                var createTable = document.createElement("TR");
+
+                var node = document.createElement("TD");
+                var textnode = document.createTextNode('');
+
+                node.appendChild(textnode);
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);
+                node.setAttribute("id", "product9");
+                document.getElementById("product9").innerHTML = '<img src="" alt="" height="180px"></a> '
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode(product_9);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+                var node = document.createElement("TD");                        //First create an TD node
+                var textnode = document.createTextNode("$" + product_9 * 666.98);            //then create a Text node
+                node.appendChild(textnode);                                     //then append the Text node to the TD node
+                createTable.appendChild(node);
+                document.getElementById("cartList").appendChild(createTable);  //Finally append the TD node to the table
+
+            }
+        }
+
+
+    </script>
+
+    <script>
+
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + "; " + expires;
+        }
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+            var user = getCookie("username");
+            if (user != "") {
+                alert("Welcome back " + user);
+            } else {
+                user = prompt("Please enter your name:", "");
+                if (user != "" && user != null) {
+                    setCookie("username", user, 30);
+                }
+            }
+        }
+
+    </script>
+
+
+    <meta charset="UTF-8">
+    <title>The Bird Cage</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style>
+        .hovernav:hover {
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body onload="onLoad()">
+
+
+<div class="wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-shrink" id="navi">
+        <script>
+            $(function () {
+                $('a[href*=#]:not([href=#])').click(function () {
+                    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                        var target = $(this.hash);
+                        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                        if (target.length) {
+                            $('html,body').animate({
+                                scrollTop: target.offset().top
+                            }, 1000);
+                            return false;
+                        }
+                    }
+                });
+            });
+        </script>
+        <div class="container" style="background-color: whitesmoke">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="slass%20logo.png"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <a href="#page-top">
+                    <img class="page-scroll" href=""
+                         src="https://www.svgimages.com/svg-image/s1/two-bird-cage-256x256.png"
+                         height="50px" width="70px">
+                </a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="hovernav">
+                        <a class="page-scroll" href="#services">About</a>
+                    </li>
+                    <li class="hovernav">
+                        <a class="page-scroll" href="#portfolio">Contact Info</a>
+                    </li>
+                    <li class="hovernav">
+                        <a class="page-scroll" href="#about">Products</a>
+                    </li>
+                    <li class="hovernav">
+                        <a href="checkout.html">Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+    <div class="jumbotron" id="page-top" align="center"
+         style="background-image: url(http://wallup.net/wp-content/uploads/2015/07/black-and-white-birds-digital-art-monochrome-artwork.jpg) ">
+        <h1>Welcome to "The Bird Cage!"</h1> <br>
+        <iframe width="256" height="256"
+                src="https://www.svgimages.com/svg-image/s1/two-bird-cage-256x256.png"
+                frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 800px; heigh:400px; margin: 0 auto">
+        <div class="carousel-inner">
+            <div class='item active'>
+                <img width="800" height="334"
+                     src='http://www.seanogle.com/wp-content/uploads/2009/11/toucan-1024x685.jpg'
+                     alt='info1'/>
+
+                <div class='carousel-caption'>
+                    <h1>"Wow!!!!<br>
+                        I love my purchase... best 3,000 dollars ive ever spent"</h1>
+
+                    <p>-Carrie Dunn</p>
+                </div>
+            </div>
+            <div class='item'>
+                <img width="800" height="334"
+                     src='https://upload.wikimedia.org/wikipedia/commons/e/ec/Ara_ararauna_Luc_Viatour.jpg'
+                     alt='info2'/>
+
+                <div class='carousel-caption'>
+                    <h1>"I love birds!!!!"</h1>
+
+                    <p>-John Cena</p>
+                </div>
+            </div>
+            <div class='item'>
+                <img width="800" height="334"
+                     src='https://i.ytimg.com/vi/9e5zcc7I1vE/maxresdefault.jpg'
+                     alt='info3'/>
+
+                <div class='carousel-caption'>
+                    <h1>"Peacocks are so cool"</h1>
+
+                    <p>-Scotland Wietzel </p>
+                </div>
+            </div>
+            <div class='item'>
+                <img width="800" height="334" src='https://i.ytimg.com/vi/KIYkpwyKEhY/maxresdefault.jpg' alt='info4'/>
+
+                <div class='carousel-caption'>
+                    <h1>"Best Website Ever!!!</h1>
+
+                    <p>-Topher Chu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <!-- Profile -->
+    <div id="services" align="center" class="thumbnail"
+         style="background-image: url(http://wallup.net/wp-content/uploads/2015/07/black-and-white-birds-digital-art-monochrome-artwork.jpg)">
+        <h1 style="font-family: monospace">
+            About
+        </h1>
+
+        <p> The Bird Cage is the largest specialty bird retailer of services and solutions for the lifetime needs of
+            birds.
+            At The Bird Cage, we love birds, and we believe birds make us better people. Every day with every
+            connection,
+            The Bird Cage passionate online website helps bring bird parents closer to their bird so they can live more
+            fulfilled lives.
+            This mission impacts everything we do for our customers and how we give back to our communities.
+        </p>
+
+        <section id="right">
+
+
+            <div class="gcontent">
+
+                <div class="head"></div>
+
+                <div class="boxy">
+
+
+                    <div align="center" id="slassimg">
+
+                        <img style="border: 5px solid black" width="400" height="289"
+                             src="http://www.peency.com/images/2015/07/09/bird-color-tropical.jpg" id="portfolio">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <br>
+
+        <form action="about.html">
+            <input value="More Info" type="submit">
+        </form>
+
+    </div>
+
+
+    <div align="center" style="background-color: lightgrey">
+        <h1>
+            Contact Info
+        </h1>
+        <table style="width:100%" border="5px">
+            <tbody>
+            <tr>
+                <th>Phone</th>
+                <th>PO box</th>
+                <th>Email</th>
+
+            </tr>
+            <tr>
+                <td>666-666-6666</td>
+                <td>1234 Birds Ln</td>
+                <td>TheBirdCage@Birds.com</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br>
+    <!-- Fight Now -->
+
+    <div align="center" id="about" style="background-color: lightgrey">
+        <h1>
+            Products
+        </h1>
+        <table style="width: 100%" border="5px">
+            <tbody style="text-align: center">
+            <tr>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Register</th>
+            </tr>
+            <tr>
+                <td height="250" width="250" style="text-align: center">
+                    <br><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Toco_toucan_(Ramphastos_toco).jpg"
+                             height="100%" width="100%">
+                    <br>Toucans
+                </td>
+                <td style="text-align: center">
+                    The Toco toucan is at home in South America's tropical forests but recognized everywhere.<br>
+                    The toucan's oversized, colorful bill has made it one of the world's most popular birds.
+                </td>
+                <td>$3,000</td>
+
+                <td>
+                 <button  type="submit" onclick="addProduct('product_1')"> <a href="#">Add to Cart </a></button>
+                </td>
+            </tr>
+            <tr>
+                <td height="250" width="250" style="text-align: center">
+                    <img src="http://ibc.lynxeds.com/files/pictures/green_peafowl_B.Thompson.jpg" height="100%"
+                         width="100%">
+                    Peafowls
+                </td>
+                <td style="text-align: center">Peafowl is a species of birds that include two Asiatic species (the blue
+                    or Indian peafowl originally<br>
+                    of India and Sri Lanka and the green peafowl of Myanmar, Indochina, and Java) and one African
+                    species<br>
+                    (the Congo peafowl native only to the Congo Basin) of bird in the genera Pavo and Afropavo of the
+                    <br>
+                    Phasianidae family, the pheasants and their allies, known for the male's piercing call and, among
+                    the <br>
+                    Asiatic species, his extravagant eye-spotted tail covert feathers which he displays as part of a
+                    courtship ritual. <br>
+                    The term peacock is properly reserved for the male; the female is known as a peahen, and the
+                    immature <br>
+                    offspring are sometimes called peachicks.
+                </td>
+                <td>$250</td>
+
+                <td>
+                    <form action="checkout.html">
+                        <input value="Add To Cart" type="submit" onclick="addProduct(product_2)">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td height="250" width="250" style="text-align: center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Wilson%27s_Bird_of_Paradise.jpg"
+                         height="100%" width="100%">
+                    Bird of Paradise
+                </td>
+                <td style="text-align: center"> The birds-of-paradise are members of the family Paradisaeidae of the
+                    order Passeriformes.<br>
+                    The majority of species are found in eastern Indonesia, Papua New Guinea, and eastern Australia.<br>
+                    The family has 42 species in 14 genera. The members of this family are perhaps best known for<br>
+                    the plumage of the males of the sexually dimorphic species (the majority), in particular the highly
+                    <br>
+                    elongated and elaborate feathers extending from the beak, wings, tail or head. For the most part
+                    they <br>
+                    are confined to dense rainforest habitat. The diet of all species is dominated by fruit and to a
+                    lesser<br>
+                    extent arthropods. The birds-of-paradise have a variety of breeding systems, ranging from monogamy
+                    to lek-type polygamy.
+                </td>
+                <td>$15,000</td>
+
+                <td>
+                    <form action="checkout.html">
+                        <input value="Add To Cart" type="submit" onclick="addProduct()">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td height="250" width="250" style="text-align: center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Rose-ringed_Parakeet_eating_leaves.JPG/1920px-Rose-ringed_Parakeet_eating_leaves.JPG"
+                         height="100%" width="100%">
+                    Parrot
+
+                </td>
+                <td style="text-align: center">Parrots, also known as psittacines are birds of the roughly 393 species
+                    in 92 <br>
+                    genera that make up the order Psittaciformes, found in most tropical and subtropical regions. <br>
+                    The order is subdivided into three superfamilies: the Psittacoidea ("true" parrots), the Cacatuoidea
+                    <br>
+                    (cockatoos), and the Strigopoidea (New Zealand parrots). Parrots have a generally pantropical <br>
+                    distribution with several species inhabiting temperate regions in the Southern Hemisphere, as
+                    well.<br>
+                    The greatest diversity of parrots is in South America and Australasia.
+                </td>
+                <td> $100</td>
+
+                <td>
+                    <form action="checkout.html">
+                        <input value="Add To Cart" type="submit" onclick="addProduct()">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td height="250" width="250">
+                    <img src="http://static.ddmcdn.com/gif/penguin-slideshow-141121-78754162.jpg"
+                         height="100%" width="100%">
+                    Penguins
+                </td>
+                <td>Penguins are a group of aquatic, flightless birds living<br>
+                    almost exclusively in the Southern Hemisphere, especially in Antarctica. Highly adapted for life
+                    in<br>
+                    the water, penguins have countershaded dark and white plumage, and their wings have evolved into
+                    <br>
+                    flippers. Most penguins feed on krill, fish, squid and other forms of sealife caught while swimming
+                    <br>
+                    underwater. They spend about half of their lives on land and half in the oceans.
+
+                </td>
+                <td>$10,000</td>
+
+                <td>
+                    <form action="checkout.html">
+                        <input value="Add To Cart" type="submit" onclick="addProduct()">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td height="250" width="250">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Cacatua_galerita_-perching_on_branch_-crest-8a-2c.jpg/1280px-Cacatua_galerita_-perching_on_branch_-crest-8a-2c.jpg"
+                         height="100%" width="100%">
+                    Cockatoo
+                </td>
+                <td>Cockatoos are recognisable by the showy crests and curved bills. Their plumage is generally less
+                    <br>
+                    colourful than that of other parrots, being mainly white, grey or black and often with coloured <br>
+                    features in the crest, cheeks or tail. On average they are larger than other parrots; however, <br>
+                    the cockatiel, the smallest cockatoo species, is a small bird. The phylogenetic position of the <br>
+                    cockatiel remains unresolved, other than that it is one of the earliest offshoots of the cockatoo
+                    <br>
+                    lineage. The remaining species are in two main clades. The five large black coloured cockatoos of
+                    <br>
+                    the genus Calyptorhynchus form one branch. The second and larger branch is formed by the genus <br>
+                    Cacatua, comprising 11 species of white-plumaged cockatoos and four monotypic genera that branched
+                    <br>
+                    off earlier; namely the pink and white Major Mitchell's cockatoo, the pink and grey galah, the <br>
+                    mainly grey gang-gang cockatoo and the large black-plumaged palm cockatoo.
+                </td>
+                <td>$500</td>
+
+                <td>
+                    <form action="checkout.html">
+                        <input value="Add To Cart" type="submit" onclick="addProduct()">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td height="250" width="250">
+                    <img src="https://bbca78f093bda4e09182-3cb65c14ed6b68da0b073def86e02e97.ssl.cf1.rackcdn.com/2013/01/Macaw.jpg"
+                         height="100%" width="100%">
+                    Macaw
+                </td>
+                <td>Macaws are beautiful, brilliantly colored members of the parrot family.Many macaws have vibrant
+                    plumage.<br>
+                    The coloring is suited to life in Central and South American rain <br>
+                    forests, with their green canopies and colorful fruits and flowers. The birds boast large, powerful
+                    <br>
+                    beaks that easily crack nuts and seeds, while their dry, scaly tongues have a bone inside them that
+                    <br>
+                    makes them an effective tool for tapping into fruits.
+                </td>
+                <td>$1,000</td>
+
+                <td>
+                    <form action="checkout.html">
+                        <input value="Add To Cart" type="submit" onclick="addProduct()">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td height="250" width="250">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Blue-footed_Booby_%28Sula_nebouxii%29_-one_leg_raised.jpg"
+                         height="100%" width="100%">
+                    Booby
+                </td>
+                <td>The blue-footed booby (Sula nebouxii) is a marine bird in the family Sulidae, which includes ten
+                    <br>
+                    species of long-winged seabirds. Blue-footed boobies belong to the genus Sula, which comprises
+                    six<br>
+                    species of boobies. It is easily recognizable by its distinctive bright blue feet, which is a
+                    sexually <br>
+                    selected trait. Males display their feet in an elaborate mating ritual by lifting their feet up and
+                    <br>
+                    down while strutting before the female.
+                </td>
+                <td>$30</td>
+
+                <td>
+                    <form action="checkout.html">
+                        <input value="Add To Cart" type="submit" onclick="addProduct()">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td height="250" width="250">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Alcedo_azurea_-_Julatten.jpg"
+                         height="100%" width="100%">
+                    Kingfisher
+                </td>
+                <td>Kingfishers are a group of small to medium-sized, brightly colored birds in the order Coraciiformes.
+                    <br>
+                    They have a cosmopolitan distribution, with most species found outside of the Americas. <br>
+                    Most species are tropical in distribution, and a slight majority are found only in forests. <br>
+                    They consume a wide range of prey, as well as fish, usually caught by swooping down from a perch.
+                    <br>
+                    While kingfishers are usually thought to live near rivers and eat fish, most species live away from
+                    <br>
+                    water and eat small invertebrates. Like other members of their order, they nest in cavities, <br>
+                    usually tunnels dug into the natural or artificial banks in the ground. A quarter of all kingfishers
+                    <br>
+                    nest in disused termite nests. A few species, principally insular forms, are threatened with
+                    extinction.<br>
+                    In Britain, the word "kingfisher" normally refers to the common kingfisher.
+                </td>
+                <td>$100</td>
+
+                <td>
+                    <form action="checkout.html">
+                        <input  value="Add To Cart" type="submit" onclick="addProduct()">
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <!-- Login/Registration -->
+    <br><br><br><br><br><br><br><br><br><br>
+
+    <div class="thumbnail" align="center"
+         style="background-image: url(http://wallup.net/wp-content/uploads/2015/07/black-and-white-birds-digital-art-monochrome-artwork.jpg)">
+
+        <h1>Login/Registration</h1> <br>
+
+        <form id="team" method="POST">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" name="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="username" class="form-control" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <p class="help-block"></p>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Accept terms and services.
+                </label>
+            </div>
+            <input type="submit" name="formSubmit" value="Submit">
+        </form>
+    </div>
+</div>
+<div class="footer">
+    <p style="text-align: center">Copyright &copy; TheBirdCage</p>
+</div>
+</body>
+</html>
